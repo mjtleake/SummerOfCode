@@ -21,9 +21,9 @@ def world_generator():
         grid.append(row)
     return grid
 
+grid = world_generator()
 
 def your_position():
-    grid = world_generator()
     grid_arr = np.array(grid)
     #Generates your initial position in your world. 
     r = random.randrange(0,11)
@@ -33,10 +33,19 @@ def your_position():
         print(grid_arr)
         initial_position = (row, col)
         print("You are standing at coordinates (row, col): ", initial_position)
-
+        return initial_position
     else:
         your_position()
-   
-    
-your_position()
 
+initial_position = your_position()
+   
+def total_continent_count():
+    count = 0
+    for row in grid:
+        for col in row:
+            if col == 1:
+                count += 1
+    return count
+            
+    
+print("Total continent count: ", total_continent_count())
