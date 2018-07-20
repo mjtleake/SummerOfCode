@@ -6,9 +6,10 @@ Created on Tue Jul 17 15:20:32 2018
 """
 
 import random 
+import numpy as np
 
 def world_generator():
-    """Generates the continent where X refers to land and O refers to water.
+    """Generates the continent where 1 refers to land and 0 refers to water.
     
     """    
     grid = []
@@ -17,17 +18,25 @@ def world_generator():
         for i in range(0,11):
             x = random.choice([0, 1])
             row.append(x)
-        print(row)
         grid.append(row)
-    
-world_generator()
-"""
+    return grid
+
+
 def your_position():
+    grid = world_generator()
+    grid_arr = np.array(grid)
     #Generates your initial position in your world. 
-    row = random.choice([x for x in range(0,12)])
-    col = random.choice([x for x in range(0,12)])
-    print("(row,col) = (" + str(row) + ", " + str(col) + ")")
+    r = random.randrange(0,11)
+    c = random.randrange(0,11)
+    row, col = r, c
+    if grid_arr[row][col] == 1:
+        print(grid_arr)
+        initial_position = (row, col)
+        print("You are standing at coordinates (row, col): ", initial_position)
+
+    else:
+        your_position()
+   
     
 your_position()
 
-"""
